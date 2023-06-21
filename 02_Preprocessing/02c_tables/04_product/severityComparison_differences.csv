@@ -1,8 +1,0 @@
-"imageName","vulnerabilityID","trivySeverity","grypeSeverity"
-"httpd","CVE-2021-43519","medium","negligible"
-"node","CVE-2007-3996","low","medium"
-"node","CVE-2009-3546","low","medium"
-"python","CVE-2021-29921","critical","negligible"
-"python","CVE-2021-3426","medium","negligible"
-"python","CVE-2022-27672","medium","negligible"
-"python","CVE-2022-42919","high","negligible"

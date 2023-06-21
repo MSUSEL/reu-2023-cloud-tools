@@ -1,3 +1,0 @@
-"packageName","vulnerabilityID","severity"
-"github.com/moby/buildkit","CVE-2023-26054","MEDIUM"
-"github.com/docker/distribution","CVE-2023-2253","HIGH"
