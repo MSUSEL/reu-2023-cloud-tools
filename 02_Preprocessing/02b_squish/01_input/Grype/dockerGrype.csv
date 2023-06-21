@@ -1,0 +1,3 @@
+"packageName","vulnerabilityID","severity"
+"github.com/moby/buildkit","GHSA-gc89-7gcr-jxqc","Medium"
+"github.com/docker/distribution","GHSA-hqxw-f8mx-cpmw","High"
