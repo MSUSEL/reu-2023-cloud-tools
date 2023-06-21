@@ -1,0 +1,330 @@
+{
+  "SchemaVersion": 2,
+  "ArtifactName": "docker:latest",
+  "ArtifactType": "container_image",
+  "Metadata": {
+    "OS": {
+      "Family": "alpine",
+      "Name": "3.18.0"
+    },
+    "ImageID": "sha256:afbd1d0b8c3c2ecda6a2cc98597d4edc26d8beefe7a7ca9757c5a21c37d676f6",
+    "DiffIDs": [
+      "sha256:bb01bd7e32b58b6694c8c3622c230171f1cec24001a82068a8d30d338f420d6c",
+      "sha256:beeab6f44b6d0dbfad8bce65afb96c35a9d23b9aab4334b4191f949dab60c474",
+      "sha256:a2914058a31bd33836b2bd7a9a3dc7a3ca1d0e93dc3f7229a237a4bc7aac6f89",
+      "sha256:1491514951afed2b4077535d488f5d89302dec2f4d30d2b8f0bfd0eb50a89b5a",
+      "sha256:cfc07762e06093d129cb1138685bba4ea7748402be98d6029242447b5bd8df8c",
+      "sha256:9992172567c78cb14340f279fc12937e47a2899baa5c69b57000fa7638451512",
+      "sha256:5876090c0902005e6ac79c5ee301a0c61ce0d2fa2295430490d82208415a616a",
+      "sha256:537f057702b221f719c12399d9170a79ce307bd13f84210b8d94d78c81c3c8da",
+      "sha256:39a87c030270d7b34705a7a2ff2f94fd7aa2a88e9c8606abd9e730b2d9f3daa0",
+      "sha256:e2a85bbab5040ab08fd5602d4087bfdfe79c9c1313764b881f3efa9dccaf22ba",
+      "sha256:09ab88bbc9811c8311613f89e72d6733436ad3e560bec164c3d3fa5d7fdb4a3a",
+      "sha256:b25db679e439d38cf49c062ac936c8a3fcbc8ba1d53ea2e8f9735e970eb81dc1",
+      "sha256:0fab808612664a8f127afb580c1ae2cb7d89f3d5ac31991c7a556d4c054464c1",
+      "sha256:d5a29d9526c64b480cdd3131e069e990215fd15560390dfbb8af7532d8ae2162"
+    ],
+    "RepoTags": [
+      "docker:24.0.2",
+      "docker:latest"
+    ],
+    "RepoDigests": [
+      "docker@sha256:0ecf72e876d2c7e56dd6d97c58d732f2dce8fbcb5905a031d957c5da1375fe45"
+    ],
+    "ImageConfig": {
+      "architecture": "amd64",
+      "created": "2023-05-30T23:05:39Z",
+      "history": [
+        {
+          "created": "2023-05-09T23:11:10Z",
+          "created_by": "/bin/sh -c #(nop) ADD file:7625ddfd589fb824ee39f1b1eb387b98f3676420ff52f26eb9d975151e889667 in / "
+        },
+        {
+          "created": "2023-05-09T23:11:10Z",
+          "created_by": "/bin/sh -c #(nop)  CMD [\"/bin/sh\"]",
+          "empty_layer": true
+        },
+        {
+          "created": "2023-06-13T17:05:42Z",
+          "created_by": "RUN /bin/sh -c apk add --no-cache \t\tca-certificates \t\topenssh-client # buildkit",
+          "comment": "buildkit.dockerfile.v0"
+        },
+        {
+          "created": "2023-06-13T17:05:42Z",
+          "created_by": "RUN /bin/sh -c [ -e /etc/nsswitch.conf ] \u0026\u0026 grep '^hosts: files dns' /etc/nsswitch.conf # buildkit",
+          "comment": "buildkit.dockerfile.v0"
+        },
+        {
+          "created": "2023-06-13T17:05:42Z",
+          "created_by": "ENV DOCKER_VERSION=24.0.2",
+          "comment": "buildkit.dockerfile.v0",
+          "empty_layer": true
+        },
+        {
+          "created": "2023-06-13T17:05:42Z",
+          "created_by": "RUN /bin/sh -c set -eux; \t\tapkArch=\"$(apk --print-arch)\"; \tcase \"$apkArch\" in \t\t'x86_64') \t\t\turl='https://download.docker.com/linux/static/stable/x86_64/docker-24.0.2.tgz'; \t\t\t;; \t\t'armhf') \t\t\turl='https://download.docker.com/linux/static/stable/armel/docker-24.0.2.tgz'; \t\t\t;; \t\t'armv7') \t\t\turl='https://download.docker.com/linux/static/stable/armhf/docker-24.0.2.tgz'; \t\t\t;; \t\t'aarch64') \t\t\turl='https://download.docker.com/linux/static/stable/aarch64/docker-24.0.2.tgz'; \t\t\t;; \t\t*) echo \u003e\u00262 \"error: unsupported 'docker.tgz' architecture ($apkArch)\"; exit 1 ;; \tesac; \t\twget -O 'docker.tgz' \"$url\"; \t\ttar --extract \t\t--file docker.tgz \t\t--strip-components 1 \t\t--directory /usr/local/bin/ \t\t--no-same-owner \t\t'docker/docker' \t; \trm docker.tgz; \t\tdocker --version # buildkit",
+          "comment": "buildkit.dockerfile.v0"
+        },
+        {
+          "created": "2023-06-13T17:05:42Z",
+          "created_by": "ENV DOCKER_BUILDX_VERSION=0.11.0",
+          "comment": "buildkit.dockerfile.v0",
+          "empty_layer": true
+        },
+        {
+          "created": "2023-06-13T17:05:42Z",
+          "created_by": "RUN /bin/sh -c set -eux; \t\tapkArch=\"$(apk --print-arch)\"; \tcase \"$apkArch\" in \t\t'x86_64') \t\t\turl='https://github.com/docker/buildx/releases/download/v0.11.0/buildx-v0.11.0.linux-amd64'; \t\t\tsha256='ec2c9da22c3b733ad96d6a6897750153d884f1b2b86f2864ee5f743ce931055d'; \t\t\t;; \t\t'armhf') \t\t\turl='https://github.com/docker/buildx/releases/download/v0.11.0/buildx-v0.11.0.linux-arm-v6'; \t\t\tsha256='a925462288a55b709a42431fe39bb0e67f033961f02a4754897c4a388355feea'; \t\t\t;; \t\t'armv7') \t\t\turl='https://github.com/docker/buildx/releases/download/v0.11.0/buildx-v0.11.0.linux-arm-v7'; \t\t\tsha256='e3f18a0d10346d8e53aff743fccfc0b95e45dc0235c3b0b72b49d3452c72b9e0'; \t\t\t;; \t\t'aarch64') \t\t\turl='https://github.com/docker/buildx/releases/download/v0.11.0/buildx-v0.11.0.linux-arm64'; \t\t\tsha256='e50f34f8feb7004407f826a375090bec6191891c473347b41b05cf5864bc5240'; \t\t\t;; \t\t'ppc64le') \t\t\turl='https://github.com/docker/buildx/releases/download/v0.11.0/buildx-v0.11.0.linux-ppc64le'; \t\t\tsha256='de8670ab6b2c34feb32289d04af07014bb4517de879d1fdb6e31a00da28f1df4'; \t\t\t;; \t\t'riscv64') \t\t\turl='https://github.com/docker/buildx/releases/download/v0.11.0/buildx-v0.11.0.linux-riscv64'; \t\t\tsha256='a07ad5791d6e60094e38147ef5f5eac406b2692aa380eae5ac866bde91bcdc89'; \t\t\t;; \t\t's390x') \t\t\turl='https://github.com/docker/buildx/releases/download/v0.11.0/buildx-v0.11.0.linux-s390x'; \t\t\tsha256='fc1a57b9fb69f7736908bbea94013eb17b5ae03cd5ed99b0bd61e223f9b6e4a7'; \t\t\t;; \t\t*) echo \u003e\u00262 \"warning: unsupported 'docker-buildx' architecture ($apkArch); skipping\"; exit 0 ;; \tesac; \t\twget -O 'docker-buildx' \"$url\"; \techo \"$sha256 *\"'docker-buildx' | sha256sum -c -; \t\tplugin='/usr/local/libexec/docker/cli-plugins/docker-buildx'; \tmkdir -p \"$(dirname \"$plugin\")\"; \tmv -vT 'docker-buildx' \"$plugin\"; \tchmod +x \"$plugin\"; \t\tdocker buildx version # buildkit",
+          "comment": "buildkit.dockerfile.v0"
+        },
+        {
+          "created": "2023-06-13T17:05:42Z",
+          "created_by": "ENV DOCKER_COMPOSE_VERSION=2.18.1",
+          "comment": "buildkit.dockerfile.v0",
+          "empty_layer": true
+        },
+        {
+          "created": "2023-06-13T17:05:42Z",
+          "created_by": "RUN /bin/sh -c set -eux; \t\tapkArch=\"$(apk --print-arch)\"; \tcase \"$apkArch\" in \t\t'x86_64') \t\t\turl='https://github.com/docker/compose/releases/download/v2.18.1/docker-compose-linux-x86_64'; \t\t\tsha256='b4e6aff14c30f82ce26e94d37686b5598b3f870ce1e053927c853b4f4b128575'; \t\t\t;; \t\t'armhf') \t\t\turl='https://github.com/docker/compose/releases/download/v2.18.1/docker-compose-linux-armv6'; \t\t\tsha256='34430890fe8ab68fe091a2907ebff174d1d6dcfc3d4e87f8c50bb105a2ac8b5f'; \t\t\t;; \t\t'armv7') \t\t\turl='https://github.com/docker/compose/releases/download/v2.18.1/docker-compose-linux-armv7'; \t\t\tsha256='cced34fc17c3689b5e0760b115ef481014eb004370a7b9380fc25eeef55570bb'; \t\t\t;; \t\t'aarch64') \t\t\turl='https://github.com/docker/compose/releases/download/v2.18.1/docker-compose-linux-aarch64'; \t\t\tsha256='6d1784542f74806ef0ed4e798d31c91604453eb06b86448b4c60d7df5d5b7afb'; \t\t\t;; \t\t'ppc64le') \t\t\turl='https://github.com/docker/compose/releases/download/v2.18.1/docker-compose-linux-ppc64le'; \t\t\tsha256='baa21ead951f0b0a0dc191e4dc7718e584961d0fcbb5969004bdcf1950203cde'; \t\t\t;; \t\t'riscv64') \t\t\turl='https://github.com/docker/compose/releases/download/v2.18.1/docker-compose-linux-riscv64'; \t\t\tsha256='2e84879a8677bcebda18d7772a86fa107f3745ba693f7c9c397b9fede355e3f2'; \t\t\t;; \t\t's390x') \t\t\turl='https://github.com/docker/compose/releases/download/v2.18.1/docker-compose-linux-s390x'; \t\t\tsha256='e8d5669b5f11212310d080d239348fe293b783c7357bb1085728fbed69e519c9'; \t\t\t;; \t\t*) echo \u003e\u00262 \"warning: unsupported 'docker-compose' architecture ($apkArch); skipping\"; exit 0 ;; \tesac; \t\twget -O 'docker-compose' \"$url\"; \techo \"$sha256 *\"'docker-compose' | sha256sum -c -; \t\tplugin='/usr/local/libexec/docker/cli-plugins/docker-compose'; \tmkdir -p \"$(dirname \"$plugin\")\"; \tmv -vT 'docker-compose' \"$plugin\"; \tchmod +x \"$plugin\"; \t\tln -sv \"$plugin\" /usr/local/bin/; \tdocker-compose --version; \tdocker compose version # buildkit",
+          "comment": "buildkit.dockerfile.v0"
+        },
+        {
+          "created": "2023-06-13T17:05:42Z",
+          "created_by": "COPY modprobe.sh /usr/local/bin/modprobe # buildkit",
+          "comment": "buildkit.dockerfile.v0"
+        },
+        {
+          "created": "2023-06-13T17:05:42Z",
+          "created_by": "COPY docker-entrypoint.sh /usr/local/bin/ # buildkit",
+          "comment": "buildkit.dockerfile.v0"
+        },
+        {
+          "created": "2023-06-13T17:05:42Z",
+          "created_by": "ENV DOCKER_TLS_CERTDIR=/certs",
+          "comment": "buildkit.dockerfile.v0",
+          "empty_layer": true
+        },
+        {
+          "created": "2023-06-13T17:05:42Z",
+          "created_by": "RUN /bin/sh -c mkdir /certs /certs/client \u0026\u0026 chmod 1777 /certs /certs/client # buildkit",
+          "comment": "buildkit.dockerfile.v0"
+        },
+        {
+          "created": "2023-06-13T17:05:42Z",
+          "created_by": "ENTRYPOINT [\"docker-entrypoint.sh\"]",
+          "comment": "buildkit.dockerfile.v0",
+          "empty_layer": true
+        },
+        {
+          "created": "2023-06-13T17:05:42Z",
+          "created_by": "CMD [\"sh\"]",
+          "comment": "buildkit.dockerfile.v0",
+          "empty_layer": true
+        },
+        {
+          "created": "2023-05-30T23:05:39Z",
+          "created_by": "RUN /bin/sh -c set -eux; \tapk add --no-cache \t\tbtrfs-progs \t\te2fsprogs \t\te2fsprogs-extra \t\tip6tables \t\tiptables \t\topenssl \t\tshadow-uidmap \t\txfsprogs \t\txz \t\tpigz \t; \tif zfs=\"$(apk info --no-cache --quiet zfs)\" \u0026\u0026 [ -n \"$zfs\" ]; then \t\tapk add --no-cache zfs; \tfi # buildkit",
+          "comment": "buildkit.dockerfile.v0"
+        },
+        {
+          "created": "2023-05-30T23:05:39Z",
+          "created_by": "RUN /bin/sh -c set -eux; \taddgroup -S dockremap; \tadduser -S -G dockremap dockremap; \techo 'dockremap:165536:65536' \u003e\u003e /etc/subuid; \techo 'dockremap:165536:65536' \u003e\u003e /etc/subgid # buildkit",
+          "comment": "buildkit.dockerfile.v0"
+        },
+        {
+          "created": "2023-05-30T23:05:39Z",
+          "created_by": "RUN /bin/sh -c set -eux; \t\tapkArch=\"$(apk --print-arch)\"; \tcase \"$apkArch\" in \t\t'x86_64') \t\t\turl='https://download.docker.com/linux/static/stable/x86_64/docker-24.0.2.tgz'; \t\t\t;; \t\t'armhf') \t\t\turl='https://download.docker.com/linux/static/stable/armel/docker-24.0.2.tgz'; \t\t\t;; \t\t'armv7') \t\t\turl='https://download.docker.com/linux/static/stable/armhf/docker-24.0.2.tgz'; \t\t\t;; \t\t'aarch64') \t\t\turl='https://download.docker.com/linux/static/stable/aarch64/docker-24.0.2.tgz'; \t\t\t;; \t\t*) echo \u003e\u00262 \"error: unsupported 'docker.tgz' architecture ($apkArch)\"; exit 1 ;; \tesac; \t\twget -O 'docker.tgz' \"$url\"; \t\ttar --extract \t\t--file docker.tgz \t\t--strip-components 1 \t\t--directory /usr/local/bin/ \t\t--no-same-owner \t\t--exclude 'docker/docker' \t; \trm docker.tgz; \t\tdockerd --version; \tcontainerd --version; \tctr --version; \trunc --version # buildkit",
+          "comment": "buildkit.dockerfile.v0"
+        },
+        {
+          "created": "2023-05-30T23:05:39Z",
+          "created_by": "ENV DIND_COMMIT=d58df1fc6c866447ce2cd129af10e5b507705624",
+          "comment": "buildkit.dockerfile.v0",
+          "empty_layer": true
+        },
+        {
+          "created": "2023-05-30T23:05:39Z",
+          "created_by": "RUN /bin/sh -c set -eux; \twget -O /usr/local/bin/dind \"https://raw.githubusercontent.com/docker/docker/${DIND_COMMIT}/hack/dind\"; \tchmod +x /usr/local/bin/dind # buildkit",
+          "comment": "buildkit.dockerfile.v0"
+        },
+        {
+          "created": "2023-05-30T23:05:39Z",
+          "created_by": "COPY dockerd-entrypoint.sh /usr/local/bin/ # buildkit",
+          "comment": "buildkit.dockerfile.v0"
+        },
+        {
+          "created": "2023-05-30T23:05:39Z",
+          "created_by": "VOLUME [/var/lib/docker]",
+          "comment": "buildkit.dockerfile.v0",
+          "empty_layer": true
+        },
+        {
+          "created": "2023-05-30T23:05:39Z",
+          "created_by": "EXPOSE map[2375/tcp:{} 2376/tcp:{}]",
+          "comment": "buildkit.dockerfile.v0",
+          "empty_layer": true
+        },
+        {
+          "created": "2023-05-30T23:05:39Z",
+          "created_by": "ENTRYPOINT [\"dockerd-entrypoint.sh\"]",
+          "comment": "buildkit.dockerfile.v0",
+          "empty_layer": true
+        },
+        {
+          "created": "2023-05-30T23:05:39Z",
+          "created_by": "CMD []",
+          "comment": "buildkit.dockerfile.v0",
+          "empty_layer": true
+        }
+      ],
+      "os": "linux",
+      "rootfs": {
+        "type": "layers",
+        "diff_ids": [
+          "sha256:bb01bd7e32b58b6694c8c3622c230171f1cec24001a82068a8d30d338f420d6c",
+          "sha256:beeab6f44b6d0dbfad8bce65afb96c35a9d23b9aab4334b4191f949dab60c474",
+          "sha256:a2914058a31bd33836b2bd7a9a3dc7a3ca1d0e93dc3f7229a237a4bc7aac6f89",
+          "sha256:1491514951afed2b4077535d488f5d89302dec2f4d30d2b8f0bfd0eb50a89b5a",
+          "sha256:cfc07762e06093d129cb1138685bba4ea7748402be98d6029242447b5bd8df8c",
+          "sha256:9992172567c78cb14340f279fc12937e47a2899baa5c69b57000fa7638451512",
+          "sha256:5876090c0902005e6ac79c5ee301a0c61ce0d2fa2295430490d82208415a616a",
+          "sha256:537f057702b221f719c12399d9170a79ce307bd13f84210b8d94d78c81c3c8da",
+          "sha256:39a87c030270d7b34705a7a2ff2f94fd7aa2a88e9c8606abd9e730b2d9f3daa0",
+          "sha256:e2a85bbab5040ab08fd5602d4087bfdfe79c9c1313764b881f3efa9dccaf22ba",
+          "sha256:09ab88bbc9811c8311613f89e72d6733436ad3e560bec164c3d3fa5d7fdb4a3a",
+          "sha256:b25db679e439d38cf49c062ac936c8a3fcbc8ba1d53ea2e8f9735e970eb81dc1",
+          "sha256:0fab808612664a8f127afb580c1ae2cb7d89f3d5ac31991c7a556d4c054464c1",
+          "sha256:d5a29d9526c64b480cdd3131e069e990215fd15560390dfbb8af7532d8ae2162"
+        ]
+      },
+      "config": {
+        "Entrypoint": [
+          "dockerd-entrypoint.sh"
+        ],
+        "Env": [
+          "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+          "DOCKER_VERSION=24.0.2",
+          "DOCKER_BUILDX_VERSION=0.11.0",
+          "DOCKER_COMPOSE_VERSION=2.18.1",
+          "DOCKER_TLS_CERTDIR=/certs",
+          "DIND_COMMIT=d58df1fc6c866447ce2cd129af10e5b507705624"
+        ],
+        "Volumes": {
+          "/var/lib/docker": {}
+        },
+        "ArgsEscaped": true
+      }
+    }
+  },
+  "Results": [
+    {
+      "Target": "docker:latest (alpine 3.18.0)",
+      "Class": "os-pkgs",
+      "Type": "alpine"
+    },
+    {
+      "Target": "usr/local/libexec/docker/cli-plugins/docker-buildx",
+      "Class": "lang-pkgs",
+      "Type": "gobinary",
+      "Vulnerabilities": [
+        {
+          "VulnerabilityID": "CVE-2023-26054",
+          "PkgName": "github.com/moby/buildkit",
+          "InstalledVersion": "v0.11.0-rc3.0.20230609092854-67a08623b95a",
+          "FixedVersion": "0.11.4",
+          "Layer": {
+            "DiffID": "sha256:cfc07762e06093d129cb1138685bba4ea7748402be98d6029242447b5bd8df8c"
+          },
+          "SeveritySource": "ghsa",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2023-26054",
+          "DataSource": {
+            "ID": "ghsa",
+            "Name": "GitHub Security Advisory Go",
+            "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Ago"
+          },
+          "Title": "Data disclosure in provenance attestation describing a build",
+          "Description": "BuildKit is a toolkit for converting source code to build artifacts in an efficient, expressive and repeatable manner. In affected versions when the user sends a build request that contains a Git URL that contains credentials and the build creates a provenance attestation describing that build, these credentials could be visible from the provenance attestation. Git URL can be passed in two ways: 1) Invoking build directly from a URL with credentials. 2) If the client sends additional version control system (VCS) info hint parameters on builds from a local source. Usually, that would mean reading the origin URL from `.git/config` file. When a build is performed under specific conditions where credentials were passed to BuildKit they may be visible to everyone who has access to provenance attestation. Provenance attestations and VCS info hints were added in version v0.11.0. Previous versions are not vulnerable. In v0.10, when building directly from Git URL, the same URL could be visible in `BuildInfo` structure that is a predecessor of Provenance attestations. Previous versions are not vulnerable. This bug has been fixed in v0.11.4. Users are advised to upgrade. Users unable to upgrade may disable VCS info hints by setting `BUILDX_GIT_INFO=0`. `buildctl` does not set VCS hints based on `.git` directory, and values would need to be passed manually with `--opt`.",
+          "Severity": "MEDIUM",
+          "CVSS": {
+            "ghsa": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:N/A:N",
+              "V3Score": 6.5
+            },
+            "nvd": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:N/A:N",
+              "V3Score": 6.5
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:N/A:N",
+              "V3Score": 6.5
+            }
+          },
+          "References": [
+            "https://access.redhat.com/security/cve/CVE-2023-26054",
+            "https://github.com/advisories/GHSA-gc89-7gcr-jxqc",
+            "https://github.com/moby/buildkit/commit/75123c696506bdbca1ed69906479e200f1b62604",
+            "https://github.com/moby/buildkit/security/advisories/GHSA-gc89-7gcr-jxqc",
+            "https://nvd.nist.gov/vuln/detail/CVE-2023-26054",
+            "https://www.cve.org/CVERecord?id=CVE-2023-26054",
+            "https://www.rfc-editor.org/rfc/rfc3986#section-3.2.1"
+          ],
+          "PublishedDate": "2023-03-06T19:15:00Z",
+          "LastModifiedDate": "2023-03-13T18:37:00Z"
+        }
+      ]
+    },
+    {
+      "Target": "usr/local/libexec/docker/cli-plugins/docker-compose",
+      "Class": "lang-pkgs",
+      "Type": "gobinary",
+      "Vulnerabilities": [
+        {
+          "VulnerabilityID": "CVE-2023-2253",
+          "PkgName": "github.com/docker/distribution",
+          "InstalledVersion": "v2.8.1+incompatible",
+          "FixedVersion": "2.8.2-beta.1",
+          "Layer": {
+            "DiffID": "sha256:9992172567c78cb14340f279fc12937e47a2899baa5c69b57000fa7638451512"
+          },
+          "SeveritySource": "ghsa",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2023-2253",
+          "DataSource": {
+            "ID": "ghsa",
+            "Name": "GitHub Security Advisory Go",
+            "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Ago"
+          },
+          "Title": "DoS from malicious API request",
+          "Description": "A flaw was found in the `/v2/_catalog` endpoint in distribution/distribution, which accepts a parameter to control the maximum number of records returned (query string: `n`). This vulnerability allows a malicious user to submit an unreasonably large value for `n,` causing the allocation of a massive string array, possibly causing a denial of service through excessive use of memory.",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-770"
+          ],
+          "CVSS": {
+            "ghsa": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 7.5
+            },
+            "nvd": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 6.5
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 5.9
+            }
+          },
+          "References": [
+            "https://access.redhat.com/security/cve/CVE-2023-2253",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2189886",
+            "https://github.com/advisories/GHSA-hqxw-f8mx-cpmw",
+            "https://github.com/distribution/distribution/commit/f55a6552b006a381d9167e328808565dd2bf77dc",
+            "https://github.com/distribution/distribution/security/advisories/GHSA-hqxw-f8mx-cpmw",
+            "https://nvd.nist.gov/vuln/detail/CVE-2023-2253",
+            "https://www.cve.org/CVERecord?id=CVE-2023-2253"
+          ],
+          "PublishedDate": "2023-06-06T20:15:00Z",
+          "LastModifiedDate": "2023-06-13T19:09:00Z"
+        }
+      ]
+    }
+  ]
+}
