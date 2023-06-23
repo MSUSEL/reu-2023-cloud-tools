@@ -11,8 +11,6 @@ library(here)
 # Set the root directory using the here package
 root_dir <- here()
 
-knitr::opts_knit$set(root.dir = '/Users/gabecowley/Documents/2023SummerResearch/02_Preprocessing/02a_jsonTocsv/Grype')
-
 library(jsonlite)
 library(tidyverse)
 library(Dict)
@@ -20,13 +18,8 @@ library(Dict)
 # Replace the hardcoded image name with a variable named "image"
 image <- "ubuntu"
 
-
 # Initialize data
 json_data <- jsonlite::fromJSON(txt = readLines(here("02_Preprocessing/02a_jsonTocsv/01_input/Grype", paste0(image, "Grype.json"))))
-
-# Initialize
-json_data <- jsonlite::fromJSON(txt = readLines(paste0('/Users/gabecowley/Documents/2023SummerResearch/02_Preprocessing/02a_jsonTocsv/01_input/Grype/', image, "Grype.json")))
-
 
 packageName <- json_data$matches$artifact$name
 severity <- json_data$matches$vulnerability$severity
@@ -37,9 +30,6 @@ data <- data.frame(packageName, vulnerabilityID, severity)
 # Load the CSV file
 
 connectedVulnerabilities <- read.csv(here("02_Preprocessing/02a_jsonTocsv/03_incremental/connectedVulnerabilityIDs.csv"))
-
-connectedVulnerabilities <- read.csv("/Users/gabecowley/Documents/2023SummerResearch/02_Preprocessing/02a_jsonTocsv/03_incremental/connectedVulnerabilityIDs.csv")
-
 
 #BY THE WAY: Don't worry about this error message from the below "if statement"
 #       Error in if (vulnerabilityID[i] != relatedVulnerabilitiesID[i]) { : 
@@ -66,8 +56,6 @@ if (length(json_data$matches$vulnerability$id) != 0) {
 
           write.csv(connectedVulnerabilities, file = here("02_Preprocessing/02a_jsonTocsv/03_incremental/connectedVulnerabilityIDs.csv"), row.names = FALSE)
 
-          write.csv(connectedVulnerabilities, file = "/Users/gabecowley/Documents/2023SummerResearch/02_Preprocessing/02a_jsonTocsv/03_incremental/connectedVulnerabilityIDs.csv", row.names = FALSE)
-
         }
       }
     }
@@ -78,19 +66,13 @@ if (length(json_data$matches$vulnerability$id) != 0) {
 ```{r}
 
 # Specify the directory path
-
 directory_path <- here("02_Preprocessing/02a_jsonTocsv/04_product/Grype/")
-
-directory_path <- "/Users/gabecowley/Documents/2023SummerResearch/02_Preprocessing/02a_jsonTocsv/04_product/Grype/"
-
 
 # Specify the output file name as a variable
 output_name <- paste0(image, "Grype.csv")
 
 # Concatenate the directory path and output file name
 file_path <- here(directory_path, output_name)
-
-file_path <- paste0(directory_path, output_name)
 
 # Save the data frame as a CSV file in the specified directory
 write.csv(data, file = file_path, row.names = FALSE)
