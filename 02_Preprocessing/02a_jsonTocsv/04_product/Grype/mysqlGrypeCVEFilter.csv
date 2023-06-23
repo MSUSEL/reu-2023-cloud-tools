@@ -1,0 +1,17 @@
+packageName,vulnerabilityID,severity
+pip,CVE-2018-20225,High
+gnutls,CVE-2021-20232,Critical
+libgcrypt,CVE-2021-33560,High
+pip,CVE-2021-3572,Medium
+pip,CVE-2021-3572,Medium
+libgcrypt,CVE-2021-40528,Medium
+certifi,CVE-2022-23491,High
+github.com/opencontainers/runc,CVE-2022-29162,High
+setuptools,CVE-2022-40897,Medium
+setuptools,CVE-2022-40897,Medium
+cryptography,CVE-2023-0286,High
+cryptography,CVE-2023-23931,Medium
+github.com/opencontainers/runc,CVE-2023-25809,Medium
+github.com/opencontainers/runc,CVE-2023-27561,High
+github.com/opencontainers/runc,CVE-2023-28642,High
+cryptography,GHSA-5cpq-8wj7-hf2v,Low

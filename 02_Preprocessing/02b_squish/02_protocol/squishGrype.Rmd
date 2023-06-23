@@ -6,15 +6,15 @@ output: html_document
 ---
 
 ```{r setup}
-knitr::opts_knit$set(root.dir = '/Users/gabecowley/Documents/2023SummerResearch/02_Preprocessing/02b_squish/01_input/Grype')
-
 library(jsonlite)
 library(tidyverse)
+library(here)
 ```
 
-```{r include=FALSE}
+```{r message=FALSE, warning=FALSE}
 # Get the list of CSV files
-csv_files <- list.files(pattern = "Grype.csv")
+csv_files <- list.files(path = here("02_Preprocessing", "02b_squish", "01_input", "Grype"),
+                        pattern = "Grype.csv", full.names = TRUE)
 
 # Create an empty list to store the processed data frames
 data_list <- list()
@@ -65,12 +65,12 @@ master_data <- select(master_data, imageName, vulnerabilityID, count, severity)
 
 ```{r}
 # Specify the directory path
-directory_path <- "/Users/gabecowley/Documents/2023SummerResearch/02_Preprocessing/02b_squish/04_product/Grype/"
+directory_path <- here("02_Preprocessing", "02b_squish", "04_product", "Grype")
 
 output_name <- "master_dataGrype.csv"
 
 # Specify the file path along with the directory path
-file_path <- paste0(directory_path, output_name)
+file_path <- here(directory_path, output_name)
 
 # Save the data frame as a CSV file
 write.csv(master_data, file = file_path, row.names = FALSE)
