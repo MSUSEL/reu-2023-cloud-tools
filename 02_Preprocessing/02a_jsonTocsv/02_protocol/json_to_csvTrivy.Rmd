@@ -1,0 +1,108 @@
+---
+title: "json_to_csv"
+output: html_document
+date: "2023-06-13"
+editor_options: 
+  chunk_output_type: console
+---
+
+## Setup
+
+#Package Setup (if required)
+
+```{r}
+#install.packages("jsonlite")
+#install.packages("tidyverse")
+#install.packages("data.table")
+library(jsonlite)
+library(tidyverse)
+library(data.table)
+library(here)
+```
+
+## Initialize
+
+```{r}
+
+# Set the root directory using the here package
+root_dir <- here()
+
+#Image Name
+input_name = "ubuntu"
+
+directory_path1 = here("02_Preprocessing/02a_jsonTocsv/01_input/Trivy/")
+
+directoryCompletion1 = "Trivy.json"
+
+# Concatenate the directory path and inpute file name
+file_path <- here(directory_path1, paste0(input_name, directoryCompletion1))
+
+#Collect Data
+json_data <- jsonlite::fromJSON(txt = readLines(file_path))
+```
+
+#Pull Desired Values
+
+```{r}
+#The problem with this section is that there are several outputs beyond just Vulnerabilities[[1]]. Assuming we want to include all the outputs, we want to write a for-loop to account for it all.
+#packageName <- json_data$Results$Vulnerabilities[[1]][[3]]
+#vulnerabilityID <- json_data$Results$Vulnerabilities[[1]][[1]]
+#severity <- json_data$Results$Vulnerabilities[[1]]$Severity
+```
+
+```{r}
+# Initialize empty vectors to store the compiled values
+packageName <- c()
+vulnerabilityID <- c()
+severity <- c()
+
+# Check if Vulnerabilities list is empty
+if (length(json_data$Results$Vulnerabilities) == 0) {
+  # Handle the case when there are no vulnerabilities
+  # Set default values or perform any desired actions
+  packageName <- NA
+  vulnerabilityID <- NA
+  severity <- NA
+} else {
+  # Iterate over each entry in the Vulnerabilities list
+  for (entry in json_data$Results$Vulnerabilities) {
+    # Extract the values for packageName, vulnerabilityID, and severity from the current entry
+    packageName_entry <- entry$PkgName
+    vulnerabilityID_entry <- entry$VulnerabilityID
+    severity_entry <- entry$Severity
+
+    # Append the values to the respective vectors
+    packageName <- c(packageName, packageName_entry)
+    vulnerabilityID <- c(vulnerabilityID, vulnerabilityID_entry)
+    severity <- c(severity, severity_entry)
+  }
+}
+
+```
+
+## Create CSV File
+
+#Combine Lists
+
+```{r}
+# Combine the lists into a data frame
+data <- data.frame(packageName, vulnerabilityID, severity)
+```
+
+#Create CSV
+
+```{r}
+# Specify the directory path
+directory_path2 <- here("02_Preprocessing/02a_jsonTocsv/04_product/Trivy/")
+
+directoryCompletion2 = "Trivy.csv"
+
+# Specify the output file name as a variable
+output_name1 <- paste0(input_name, directoryCompletion2)
+
+# Concatenate the directory path and output file name
+file_path <- here(directory_path2, output_name1)
+
+# Save the data frame as a CSV file in the specified directory
+write.csv(data, file = file_path, row.names = FALSE)
+```

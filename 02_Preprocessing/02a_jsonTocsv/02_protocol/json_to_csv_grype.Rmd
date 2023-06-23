@@ -1,0 +1,77 @@
+---
+title: "json_to_csv_grype"
+output: html_document
+date: "2023-06-13"
+---
+
+## Setup
+```{r setup}
+
+library(here)
+
+# Set the root directory using the here package
+root_dir <- here()
+
+library(jsonlite)
+library(tidyverse)
+library(Dict)
+
+# Replace the hardcoded image name with a variable named "image"
+image <- "ubuntu"
+
+# Initialize data
+json_data <- jsonlite::fromJSON(txt = readLines(here("02_Preprocessing/02a_jsonTocsv/01_input/Grype", paste0(image, "Grype.json"))))
+
+packageName <- json_data$matches$artifact$name
+severity <- json_data$matches$vulnerability$severity
+vulnerabilityID <- json_data$matches$vulnerability$id
+data <- data.frame(packageName, vulnerabilityID, severity)
+
+### Library Equivalent Vulnerabilities List
+# Load the CSV file
+connectedVulnerabilities <- read.csv(here("02_Preprocessing/02a_jsonTocsv/03_incremental/connectedVulnerabilityIDs.csv"))
+
+#BY THE WAY: Don't worry about this error message from the below "if statement"
+#       Error in if (vulnerabilityID[i] != relatedVulnerabilitiesID[i]) { : 
+#         missing value where TRUE/FALSE needed
+# Any time that this error is applicable, we don't need an addition to the code
+
+if (length(json_data$matches$vulnerability$id) != 0) {
+  for (i in 1:length(json_data$matches$vulnerability$id)) {
+    vulnerabilityID <- json_data$matches$vulnerability$id[i]
+    relatedVulnerabilitiesID <- json_data$matches$relatedVulnerabilities[[i]]$id
+    
+    if (!(is.null(vulnerabilityID) || is.na(vulnerabilityID)) && (any(!is.null(relatedVulnerabilitiesID)) && any(!is.na(relatedVulnerabilitiesID)))) {
+      if(any(vulnerabilityID != relatedVulnerabilitiesID)) {
+        if(!vulnerabilityID %in% connectedVulnerabilities$main_vulnerability) {
+        
+          # Add a new row to the connected vulnerabilities data frame
+          newRow <- data.frame(main_vulnerability = vulnerabilityID, related_vulnerability = relatedVulnerabilitiesID)
+          connectedVulnerabilities <- rbind(connectedVulnerabilities, newRow)
+          
+          # Update an existing row
+          connectedVulnerabilities$main_vulnerability[connectedVulnerabilities$related_vulnerability == "related_vulnerability"] <-   "updated_vulnerability"
+          
+          # Write the data frame to the CSV file
+          write.csv(connectedVulnerabilities, file = here("02_Preprocessing/02a_jsonTocsv/03_incremental/connectedVulnerabilityIDs.csv"), row.names = FALSE)
+        }
+      }
+    }
+  }
+}
+```
+
+```{r}
+
+# Specify the directory path
+directory_path <- here("02_Preprocessing/02a_jsonTocsv/04_product/Grype/")
+# Specify the output file name as a variable
+output_name <- paste0(image, "Grype.csv")
+
+# Concatenate the directory path and output file name
+file_path <- here(directory_path, output_name)
+
+# Save the data frame as a CSV file in the specified directory
+write.csv(data, file = file_path, row.names = FALSE)
+
+```
