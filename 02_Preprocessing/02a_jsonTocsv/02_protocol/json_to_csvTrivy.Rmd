@@ -17,13 +17,17 @@ editor_options:
 library(jsonlite)
 library(tidyverse)
 library(data.table)
+<<<<<<< HEAD
 library(here)
+=======
+>>>>>>> 08a32b31a643c3c8569db543cd85a405d5037c7f
 ```
 
 ## Initialize
 
 ```{r}
 
+<<<<<<< HEAD
 # Set the root directory using the here package
 root_dir <- here()
 
@@ -31,11 +35,21 @@ root_dir <- here()
 input_name = "ubuntu"
 
 directory_path1 = here("02_Preprocessing/02a_jsonTocsv/01_input/Trivy/")
+=======
+#Image Name
+input_name = "ubuntu"
+
+directory_path1 = "/Users/gabecowley/Documents/2023SummerResearch/02_Preprocessing/02a_jsonTocsv/01_input/Trivy/"
+>>>>>>> 08a32b31a643c3c8569db543cd85a405d5037c7f
 
 directoryCompletion1 = "Trivy.json"
 
 # Concatenate the directory path and inpute file name
+<<<<<<< HEAD
 file_path <- here(directory_path1, paste0(input_name, directoryCompletion1))
+=======
+file_path <- paste0(directory_path1, input_name, directoryCompletion1)
+>>>>>>> 08a32b31a643c3c8569db543cd85a405d5037c7f
 
 #Collect Data
 json_data <- jsonlite::fromJSON(txt = readLines(file_path))
@@ -93,16 +107,53 @@ data <- data.frame(packageName, vulnerabilityID, severity)
 
 ```{r}
 # Specify the directory path
+<<<<<<< HEAD
 directory_path2 <- here("02_Preprocessing/02a_jsonTocsv/04_product/Trivy/")
 
+=======
+directory_path2 <- "/Users/gabecowley/Documents/2023SummerResearch/02_Preprocessing/02a_jsonTocsv/04_product/Trivy/"
+
+#directoryCompletion2 = "LongTrivy.csv"
+>>>>>>> 08a32b31a643c3c8569db543cd85a405d5037c7f
 directoryCompletion2 = "Trivy.csv"
 
 # Specify the output file name as a variable
 output_name1 <- paste0(input_name, directoryCompletion2)
 
 # Concatenate the directory path and output file name
+<<<<<<< HEAD
 file_path <- here(directory_path2, output_name1)
+=======
+file_path <- paste0(directory_path2, output_name1)
+>>>>>>> 08a32b31a643c3c8569db543cd85a405d5037c7f
 
 # Save the data frame as a CSV file in the specified directory
 write.csv(data, file = file_path, row.names = FALSE)
 ```
+<<<<<<< HEAD
+=======
+
+<!-- # Create Wide CSV File -->
+<!-- ```{r} -->
+
+<!-- #Create wide CSV -->
+<!-- transposed_data <- transpose(data) -->
+
+
+<!-- # Remove the column names -->
+<!-- colnames(transposed_data) <- NULL -->
+
+<!-- # Specify the directory path -->
+<!-- directory_path3 <- "/Users/gabecowley/Documents/2023SummerResearch/02_Preprocessing/02a_jsonTocsv/04_product/Trivy/" -->
+<!-- directoryCompletion3 <- "WideTrivy.csv" -->
+
+<!-- # Specify the output file name as a variable -->
+<!-- output_name2 <- paste0(input_name, directoryCompletion3) -->
+
+<!-- # Specify the output file path -->
+<!-- file_path <- paste0(directory_path3, output_name2) -->
+
+<!-- # Save the data frame as a CSV file in the specified directory -->
+<!-- write.csv(transposed_data, file = file_path, row.names = FALSE) -->
+<!-- ``` -->
+>>>>>>> 08a32b31a643c3c8569db543cd85a405d5037c7f
