@@ -1,38 +1,168 @@
 ---
 title: "mockPlot1"
 author: "Gabe Cowley"
-date: "2023-06-20"
+date: "2023-06-23"
 output: html_document
 ---
 
 ```{r}
 library(ggplot2)
 library(tidyverse)
+library(here)
+library(patchwork)
+library(reshape2)
+library(dplyr)
 ```
 
 
 ```{r}
-df_total <- read.csv("/Users/gabecowley/Documents/2023SummerResearch/03_Analysis/01_input/countComparison_differences.csv")
+# Read countComparison.csv
+count_data <- read.csv(here("03_Analysis", "01_input", "countComparison.csv"))
+
+# Read severityComparison.csv
+severity_data <- read.csv(here("03_Analysis", "01_input", "severityComparison.csv"))
+
 ```
 
 
-```{r}
+```{r Total Count Comparison}
 # Create a new dataframe with vulnerabilityID, trivyCount, and grypeCount columns
-plot_data <- data.frame(vulnerabilityID = df_total$vulnerabilityID,
-                        trivyCount = df_total$trivyCount,
-                        grypeCount = df_total$grypeCount)
+plot_count_data <- data.frame(vulnerabilityID = count_data$vulnerabilityID,
+                        trivyCount = count_data$trivyCount,
+                        grypeCount = count_data$grypeCount)
+plot_severity_data <- data.frame(vulnerabilityID = severity_data$vulnerabilityID,
+                        trivySvr = severity_data$trivySeverity,
+                        grypeSvr = severity_data$grypeSeverity)
 
-# Reorder vulnerabilityID based on trivyCount in descending order
-plot_data$vulnerabilityID <- factor(plot_data$vulnerabilityID,
-                                    levels = plot_data$vulnerabilityID[order(-plot_data$trivyCount)])
+# Calculate the total count of vulnerabilities for Grype and Trivy
+grype_total <- sum(count_data$grypeCount)
+trivy_total <- sum(count_data$trivyCount)
 
-# Create the plot
-ggplot(plot_data, aes(x = vulnerabilityID)) +
-  geom_point(aes(y = trivyCount), color = "red", alpha = 0.5) +
-  geom_point(aes(y = grypeCount), color = "blue", alpha = 0.5) +
-  labs(title = "Vulnerability Count Comparison",
-       x = "Vulnerability ID",
-       y = "Count") +
+# Create a new dataframe with the total counts
+totals <- data.frame(tool = c("Grype", "Trivy"),
+                     count = c(grype_total, trivy_total))
+
+# Create the bar chart
+ggplot(totals, aes(x = tool, y = count, fill = tool)) +
+  geom_bar(stat = "identity") +
+  labs(x = "Tool", y = "Total Count of Vulnerabilities",
+       title = "Comparison of Total Vulnerability Count: Grype vs. Trivy") +
+  theme_minimal()
+```
+
+```{r Grype Stacked Bar}
+# Merge the count and severity data based on vulnerabilityID
+merged_data <- merge(count_data, severity_data, by = "vulnerabilityID")
+
+# Define the desired order of severity levels
+severity_order <- c("critical", "high", "medium", "low", "negligible", "unknown")
+
+# Calculate the total counts of vulnerabilities by severity for Grype
+grype_counts <- merged_data %>%
+  group_by(grypeSeverity) %>%
+  summarise(count = sum(grypeCount)) %>%
+  mutate(tool = "Grype") %>%
+  mutate(grypeSeverity = factor(grypeSeverity, levels = severity_order))
+
+# Create the stacked bar chart for Grype
+ggplot(grype_counts, aes(x = tool, y = count, fill = grypeSeverity)) +
+  geom_bar(position = "stack", stat = "identity") +
+  scale_fill_manual(values = c("unknown" = "gray", "negligible" = "lightblue", "low" = "green", "medium" = "yellow", "high" = "orange", "critical" = "red")) +
+  labs(x = "Tool", y = "Vulnerability Count", fill = "Severity") +
+  ggtitle("Vulnerability Count by Severity: Grype") +
+  theme_minimal()
+```
+
+```{r Trivy Stacked Bar}
+# Calculate the total counts of vulnerabilities by severity for Trivy
+trivy_counts <- merged_data %>%
+  group_by(trivySeverity) %>%
+  summarise(count = sum(trivyCount)) %>%
+  mutate(tool = "Trivy") %>%
+  mutate(trivySeverity = factor(trivySeverity, levels = severity_order))
+
+# Create the stacked bar chart for Trivy
+ggplot(trivy_counts, aes(x = tool, y = count, fill = trivySeverity)) +
+  geom_bar(position = "stack", stat = "identity") +
+  scale_fill_manual(values = c("unknown" = "gray", "negligible" = "lightblue", "low" = "green", "medium" = "yellow", "high" = "orange", "critical" = "red")) +
+  labs(x = "Tool", y = "Vulnerability Count", fill = "Severity") +
+  ggtitle("Vulnerability Count by Severity: Trivy") +
+  theme_minimal()
+```
+
+```{r Merged Bar Charts}
+# Merge the count and severity data based on vulnerabilityID
+merged_data <- merge(count_data, severity_data, by = "vulnerabilityID")
+
+# Define the desired order of severity levels
+severity_order <- c("critical", "high", "medium", "low", "negligible", "unknown")
+
+# Calculate the total counts of vulnerabilities by severity for Grype
+grype_counts <- merged_data %>%
+  group_by(grypeSeverity) %>%
+  summarise(count = sum(grypeCount)) %>%
+  mutate(tool = "Grype") %>%
+  mutate(grypeSeverity = factor(grypeSeverity, levels = severity_order))
+
+# Create the stacked bar chart for Grype
+grype_plot <- ggplot(grype_counts, aes(x = tool, y = count, fill = grypeSeverity)) +
+  geom_bar(position = "stack", stat = "identity") +
+  scale_fill_manual(values = c("unknown" = "gray", "negligible" = "lightblue", "low" = "green", "medium" = "yellow", "high" = "orange", "critical" = "red")) +
+  labs(x = "Tool", y = "Vulnerability Count", fill = "Severity") +
+  ggtitle("Vulnerability Count by Severity: Grype") +
   theme_minimal()
 
+# Calculate the total counts of vulnerabilities by severity for Trivy
+trivy_counts <- merged_data %>%
+  group_by(trivySeverity) %>%
+  summarise(count = sum(trivyCount)) %>%
+  mutate(tool = "Trivy") %>%
+  mutate(trivySeverity = factor(trivySeverity, levels = severity_order))
+
+# Create the stacked bar chart for Trivy
+trivy_plot <- ggplot(trivy_counts, aes(x = tool, y = count, fill = trivySeverity)) +
+  geom_bar(position = "stack", stat = "identity") +
+  scale_fill_manual(values = c("unknown" = "gray", "negligible" = "lightblue", "low" = "green", "medium" = "yellow", "high" = "orange", "critical" = "red")) +
+  labs(x = "Tool", y = "Vulnerability Count", fill = "Severity") +
+  ggtitle("Vulnerability Count by Severity: Trivy") +
+  theme_minimal()
+
+# Combine the Grype and Trivy plots
+combined_plot <- grype_plot + trivy_plot
+
+# Display the merged plot
+combined_plot
+```
+
+```{r Combined Pie Chart}
+# Define the color palette for the pie charts
+color_palette <- c("unknown" = "gray", "negligible" = "lightblue", "low" = "green", "medium" = "yellow", "high" = "orange", "critical" = "red")
+
+# Create the comparative pie chart for Grype
+grype_pie <- ggplot(grype_counts, aes(x = "", y = count, fill = grypeSeverity, label = paste0(grypeSeverity, ": ", count))) +
+  geom_bar(width = 1, stat = "identity") +
+  coord_polar("y") +
+  labs(x = NULL, y = NULL, fill = "Severity") +
+  ggtitle("Vulnerability Count by Severity: Grype") +
+  theme_minimal() +
+  theme(legend.position = "right") +
+  scale_fill_manual(values = color_palette) +
+  guides(fill = guide_legend(title = "Severity"))
+
+# Create the comparative pie chart for Trivy
+trivy_pie <- ggplot(trivy_counts, aes(x = "", y = count, fill = trivySeverity, label = paste0(trivySeverity, ": ", count))) +
+  geom_bar(width = 1, stat = "identity") +
+  coord_polar("y") +
+  labs(x = NULL, y = NULL, fill = "Severity") +
+  ggtitle("Vulnerability Count by Severity: Trivy") +
+  theme_minimal() +
+  theme(legend.position = "right") +
+  scale_fill_manual(values = color_palette) +
+  guides(fill = guide_legend(title = "Severity"))
+
+# Combine the Grype and Trivy pie charts
+combined_pie <- grype_pie + trivy_pie
+
+# Display the merged pie charts
+combined_pie
 ```
